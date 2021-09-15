@@ -1,0 +1,89 @@
+name: Continuous Integration
+
+on:  # Define here when your project will be tested
+  push:               # all branches are tested on pushes to the repo
+  pull_request:       # all pull-requests will be tested
+  workflow_dispatch:  # this allows you to "manually" launch the workflow
+
+jobs:
+  test:
+    name: Test on Python ${{ matrix.python-version }}
+
+    runs-on: ubuntu-latest
+
+    # Here we will define the testing "matrix"
+    # -- It can be composed of whatever your matrix may be,
+    # -- including OS variations (e.g. windows, macos, etc).
+    # -- The executor will combine all possible values together
+    strategy:
+      fail-fast: false  # avoids cancelled builds if the other fails
+      matrix:
+        python-version: ["3.8", "3.9"]
+
+    # Here we define the steps to be undertaken for every test
+    # -- Each step does one action.  Code for the action sits in
+    # -- another github project (key "uses").  This way, actions
+    # -- can be programmed for any purpose.
+    steps:
+
+      # Action provided by GitHub to checkout code
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      # Action provided by "conda-incubator" to setup conda env
+      - name: Setup miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          miniconda-version: "latest"
+          python-version: ${{ matrix.python-version }}
+          auto-update-conda: true
+          auto-activate-base: false
+          activate-environment: project
+          environment-file: environment.yml
+
+      # Default action: run something
+      - name: Run tests
+        shell: bash -l {0}
+        run: |
+          conda info -a
+          pytest -sv --cov=. test.py
+          sphinx-build -b doctest doc sphinx  #runs doctests
+
+      - name: Build documentation
+        shell: bash -l {0}
+        run: |
+          sphinx-build doc sphinx  #generates html version of docs
+          touch sphinx/.nojekyll  #pages to be deployed are NOT a Jekyll site
+          coverage html -d sphinx/coverage  #dump coverage report into doc tree
+
+      - name: Upload coverage to coveralls.io
+        shell: bash -l {0}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_FLAG_NAME: ${{ matrix.python-version }}
+          COVERALLS_PARALLEL: true
+        run: |
+          conda info -a
+          coveralls --service=github
+
+      - name: Deploy documentation to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  coveralls:
+    name: Indicate completion to coveralls.io
+    needs: test
+    runs-on: ubuntu-latest
+    container: python:3-slim
+    steps:
+    - name: Finished
+      run: |
+        pip3 install --upgrade coveralls
+        coveralls --service=github --finish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

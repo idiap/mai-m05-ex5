@@ -5,20 +5,17 @@
 Troubleshooting
 ---------------
 
-You can run unit tests I have prepared like this (install nose_ first):
+You can run unit tests I have prepared like this (install pytest_ first):
 
 
 .. code-block:: shell
 
   # use your package manager to install the package "nose"
   # here, I examplify with "miniconda":
-  (project) $ conda install nose
-  (project) $ nosetests ./test.py
+  (project) $ conda install pytest
+  (project) $ pytest ./test.py
   ....
-  ----------------------------------------------------------------------
-  Ran 4 tests in 0.002s
-
-  OK
+  ================================ 4 passed in 0.63s ....
 
 In case of problems, please get in touch with me `by e-mail
 <mailto:john.doe@example.com>`_.
