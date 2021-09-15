@@ -13,12 +13,12 @@ This packakge contains the code I used to generate the tables on the paper:
 
 .. code-block:: bibtex
 
-   @inproceedings{iris2019,
+   @inproceedings{iris2021,
      author = {John Doe},
      title = {A Simple Solution to Iris Flower Classification},
-     year = {2019},
+     year = {2021},
      month = jun,
-     booktitle = {Reproducible Research Conference, Martigny, 2019},
+     booktitle = {Reproducible Research Conference, Martigny, 2021},
      url = {http://example.com/path/to/my/article.pdf},
    }
 
