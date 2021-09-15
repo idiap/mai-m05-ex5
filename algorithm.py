@@ -211,7 +211,7 @@ class Trainer:
     def dJ(self, theta, machine, X):
         """
         Calculates the vectorized partial derivative of the cost *J* w.r.t. to
-        **all** :math:`\theta`'s. Use the training dataset.
+        **all** :math:`\\theta`'s. Use the training dataset.
         """
 
         machine.theta = theta
