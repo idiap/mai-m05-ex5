@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: ci
 
 on:  # Define here when your project will be tested
   push:               # all branches are tested on pushes to the repo
@@ -67,7 +67,7 @@ jobs:
           coveralls --service=github
 
       - name: Deploy documentation to GitHub Pages
-        if: ${{ matrix.python == '3.9' }} #deploys only one variant
+        if: ${{ matrix.python-version == '3.9' }}  #deploys only one variant
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: gh-pages
