@@ -3,6 +3,7 @@ channels:
 dependencies:
   - numpy
   - scipy
+  - docopt
   - pytest
   - pytest-cov
   - sphinx

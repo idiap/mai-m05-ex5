@@ -48,6 +48,10 @@ jobs:
           conda info -a
           pytest -sv --cov=. test.py
           sphinx-build -b doctest doc sphinx  #runs doctests
+          python paper.py --help  #checks help function works at least
+          python paper.py  #basic test case
+          python paper.py --protocol=proto2  #filter by protocol
+          python paper.py --case=2  #filter by case
 
       - name: Build documentation
         shell: bash -l {0}

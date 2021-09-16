@@ -16,7 +16,14 @@ command:
 
 
 For your reference, the paper tables are repeated below, so you can check the
-reproducibility of our solution.
+reproducibility of our solution.  You may also limit the output of the program
+using command-line options.  You will find more information adding the
+``--help`` flag on the command above:
+
+.. code-block:: sh
+
+   (project) $ python paper.py --help
+
 
 
 Results for Protocol `proto1`
