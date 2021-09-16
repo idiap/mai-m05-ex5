@@ -197,7 +197,7 @@ number as printed on the output.  It does not affect the method.
 .. testcode::
 
    import paper
-   paper.test_impact_of_variables_2by2(1)
+   paper.test_impact_of_variables_2by2(1, ['proto1', 'proto2'])
 
 .. testoutput::
    :options: +NORMALIZE_WHITESPACE
