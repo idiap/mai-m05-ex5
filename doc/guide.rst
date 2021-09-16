@@ -167,7 +167,7 @@ number as printed on the output.  It does not affect the method.
 .. testcode::
 
    import paper
-   paper.test_impact_of_variables_single(1)
+   paper.test_impact_of_variables_single(1, ['proto1', 'proto2'])
 
 .. testoutput::
    :options: +NORMALIZE_WHITESPACE
@@ -231,7 +231,7 @@ number as printed on the output.  It does not affect the method.
 .. testcode::
 
    import paper
-   paper.test_impact_of_variables_3by3(1)
+   paper.test_impact_of_variables_3by3(1, ['proto1', 'proto2'])
 
 .. testoutput::
    :options: +NORMALIZE_WHITESPACE
@@ -261,7 +261,7 @@ number as printed on the output.  It does not affect the method.
 .. testcode::
 
    import paper
-   paper.test_impact_of_variables_all(1)
+   paper.test_impact_of_variables_all(1, ['proto1', 'proto2'])
 
 .. testoutput::
    :options: +NORMALIZE_WHITESPACE
