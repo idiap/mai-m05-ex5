@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false  # avoids cancelled builds if the other fails
       matrix:
-        python-version: ['3.8', '3.9']
+        python-version: ['3.9', '3.10']
 
     # Here we define the steps to be undertaken for every test
     # -- Each step does one action.  Code for the action sits in
@@ -28,7 +28,7 @@ jobs:
 
       # Action provided by GitHub to checkout code
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # Action provided by 'conda-incubator' to setup conda env
       - name: Setup miniconda
