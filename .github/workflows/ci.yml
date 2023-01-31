@@ -71,7 +71,7 @@ jobs:
           coveralls --service=github
 
       - name: Deploy documentation to GitHub Pages
-        if: ${{ matrix.python-version == '3.9' }}  #deploys only one variant
+        if: ${{ matrix.python-version == '3.10' }}  #deploys only one variant
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: gh-pages
